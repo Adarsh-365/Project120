@@ -6,7 +6,7 @@ app = Flask(__name__)
 # This data will appear on your index.html page
 products_data = [
     {
-        'id': 1,
+        'id': 0,
         'title': 'High-Speed Router',
         'price': 45.99,
         'description': 'Dual-band Wi-Fi router for office use.',
@@ -52,3 +52,4 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
