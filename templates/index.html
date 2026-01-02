@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NamsteChina Global B2B Platform</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. GLOBAL RESET & VARIABLES --- */
+        :root {
+            --primary-green: #004D40;  /* Deep Forest Green */
+            --accent-green: #00E676;   /* Bright Lime */
+            --light-mint: #E0F2F1;     /* Section Backgrounds */
+            --white: #ffffff;
+            --text-dark: #263238;
+            --text-grey: #546e7a;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: #f9f9f9;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- 2. NAVBAR --- */
+        .navbar {
+            background: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .nav-links li:hover { color: var(--primary-green); cursor: pointer; }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-text {
+            background: none;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover { background-color: #00352c; transform: translateY(-2px); }
+
+        /* --- 3. HERO SECTION --- */
+        .hero {
+            background-color: var(--primary-green);
+            color: white;
+            text-align: center;
+            padding: 80px 20px 100px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .search-container {
+            background: white;
+            max-width: 700px;
+            margin: 0 auto;
+            border-radius: 50px;
+            display: flex;
+            padding: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .search-container input {
+            flex: 1;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .search-container button {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .search-container button:hover { background-color: #00352c; }
+
+        .hero-tags {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        .hero-tags span { margin: 0 8px; cursor: pointer; border-bottom: 1px solid transparent; }
+        .hero-tags span:hover { border-bottom: 1px solid white; }
+
+        /* --- 4. TOGGLE FLOATING SECTION --- */
+        .toggle-section {
+            margin-top: -30px;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .toggle-box {
+            background: white;
+            padding: 10px;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 10px;
+        }
+
+        .toggle-btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .toggle-btn.active {
+            background-color: var(--light-mint);
+            color: var(--primary-green);
+            border: 1px solid var(--primary-green);
+        }
+
+        /* --- 5. NEW DASHBOARD SECTION (3-Col Layout) --- */
+        .dashboard-section {
+            padding: 0 5%;
+            margin-bottom: 60px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 260px 1fr 280px; /* Left Sidebar | Main | Right Sidebar */
+            gap: 20px;
+            align-items: start;
+        }
+
+        /* LEFT SIDEBAR */
+        .dash-sidebar {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .sidebar-header {
+            background: #f9f9f9;
+            padding: 15px;
+            font-weight: 700;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-dark);
+        }
+
+        .cat-list li {
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .cat-list li a {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 15px;
+            font-size: 0.9rem;
+            color: #444;
+            transition: 0.2s;
+        }
+
+        .cat-list li a:hover {
+            background-color: var(--light-mint);
+            color: var(--primary-green);
+            padding-left: 20px; /* Slide effect */
+        }
+
+        /* MIDDLE MAIN AREA */
+        .dash-main {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .main-banner {
+            background: var(--primary-green);
+            color: white;
+            border-radius: 12px;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative circle for banner background */
+        .main-banner::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .banner-txt { flex: 1; padding-right: 20px; z-index: 1; }
+        .banner-txt h2 { font-size: 1.8rem; margin: 10px 0; }
+        .banner-txt p { font-size: 0.9rem; margin-bottom: 20px; opacity: 0.9; line-height: 1.5; }
+
+        .badge {
+            background: var(--accent-green);
+            color: var(--primary-green);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .banner-visual img {
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1;
+            max-width: 100%;
+        }
+
+        /* Search Box at Bottom of Main */
+        .lookup-box {
+            background: white;
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .lookup-box h3 { font-size: 1rem; white-space: nowrap; margin: 0; }
+
+        .lookup-input {
+            flex: 1;
+            display: flex;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .lookup-input input {
+            flex: 1;
+            border: none;
+            padding: 10px 15px;
+            outline: none;
+        }
+
+        .lookup-input button {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+        }
+
+        /* RIGHT SIDEBAR */
+        .dash-right {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .company-list { padding: 10px; }
+
+        .company-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .company-item:last-child { border-bottom: none; }
+
+        .co-logo {
+            width: 40px;
+            height: 40px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .co-info { display: flex; flex-direction: column; }
+        .co-info strong { font-size: 0.9rem; color: #333; }
+        .co-info span { font-size: 0.75rem; color: #888; }
+
+
+        /* --- 6. SECTORS GRID --- */
+        .section {
+            padding: 60px 5%; /* Aligned with dashboard padding */
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .sectors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .sector-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .sector-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-color: var(--primary-green);
+        }
+
+        .sector-card i {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .sector-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .sector-card.blue-card {
+            background-color: var(--primary-green);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .sector-card.blue-card i, .sector-card.blue-card h3, .sector-card.blue-card p {
+            color: white;
+        }
+
+        .sector-card.blue-card button {
+            background: white;
+            color: var(--primary-green);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* --- 7. FEATURES (TABS) --- */
+        .features-tabs {
+            display: flex;
+            gap: 30px;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            padding-bottom: 10px;
+            color: var(--text-grey);
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .tab.active {
+            color: var(--primary-green);
+            border-bottom: 3px solid var(--primary-green);
+        }
+
+        .feature-content {
+            display: flex;
+            gap: 50px;
+            background: var(--light-mint);
+            padding: 40px;
+            border-radius: 20px;
+            align-items: center;
+        }
+
+        .feature-text { flex: 1; }
+        .feature-text h2 { margin-bottom: 15px; color: var(--primary-green); }
+        .feature-text p { line-height: 1.6; color: var(--text-grey); margin-bottom: 20px; }
+        
+        .feature-img {
+            flex: 1.5;
+            background: white;
+            height: 300px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .feature-img img { width: 100%; height: auto; }
+
+        /* --- 8. FREIGHT QUOTES --- */
+        .freight-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .freight-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 15px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            align-items: end;
+        }
+
+        .input-group label { display: block; font-size: 0.85rem; margin-bottom: 5px; color: var(--text-grey); }
+        .input-group input { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ddd; 
+            border-radius: 6px; 
+        }
+
+        .freight-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .quote-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .quote-price { color: var(--primary-green); font-weight: bold; font-size: 1.2rem; }
+
+        /* --- 9. TRENDING (HORIZONTAL SCROLL) --- */
+        .scroll-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding-bottom: 20px;
+        }
+
+        .product-card {
+            min-width: 250px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            transition: var(--transition);
+        }
+
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+        .p-img { height: 150px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; }
+        .p-img img { max-width: 100%; max-height: 100%; }
+
+        .p-info { padding: 15px; }
+        .p-row { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+        .price { font-weight: bold; color: var(--text-dark); }
+        .origin span { font-size: 0.8rem; color: #666; }
+
+        /* --- 10. SOURCING STEPS --- */
+        .sourcing-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            align-items: center;
+        }
+
+        .step-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .step-num {
+            width: 40px;
+            height: 40px;
+            background: var(--light-mint);
+            color: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .sourcing-img {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* --- 11. CALENDAR & INSIGHTS --- */
+        .split-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+        }
+
+        .green-box {
+            background: var(--primary-green);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .event-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .event-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+        }
+
+        /* --- 12. CTA & FOOTER --- */
+        .cta-section {
+            background: linear-gradient(135deg, var(--light-mint) 0%, #ffffff 100%);
+            text-align: center;
+            padding: 80px 20px;
+            margin-top: 60px;
+        }
+
+        .cta-section h2 { font-size: 2.5rem; margin-bottom: 30px; color: var(--primary-green); }
+
+        .cta-buttons { display: flex; justify-content: center; gap: 20px; }
+
+        .btn-large {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-fill { background: var(--primary-green); color: white; border: none; }
+        .btn-outline { background: white; color: var(--primary-green); border: 2px solid var(--primary-green); }
+
+        footer {
+            background: var(--primary-green);
+            color: white;
+            padding: 60px 10% 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 { margin-bottom: 20px; font-size: 1.1rem; }
+        .footer-col ul li { margin-bottom: 10px; opacity: 0.8; cursor: pointer; }
+        .footer-col ul li:hover { opacity: 1; text-decoration: underline; }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .dash-sidebar, .dash-right { display: none; } /* On Mobile, Stack or Hide sidebars */
+            .main-banner { flex-direction: column; text-align: center; }
+            .banner-txt { padding-right: 0; margin-bottom: 20px; }
+            .lookup-box { flex-direction: column; align-items: stretch; }
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .split-section { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .search-container { flex-direction: column; border-radius: 20px; }
+            .search-container input { border-radius: 20px; }
+            .search-container button { width: 100%; border-radius: 20px; margin-top: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-earth-americas"></i> NamsteChina.org
+        </div>
+        <ul class="nav-links">
+            <li>Home</li>
+            <li>About Us</li>
+            <li>Our Partners</li>
+            <li>Contact Us</li>
+        </ul>
+        <div class="auth-buttons">
+            <button class="btn-text">Log In</button>
+            <button class="btn-primary">Join Free</button>
+        </div>
+    </nav>
+
+    <!-- 2. HERO SECTION -->
+    <header class="hero">
+        <span class="badge">90% Time Saving</span>
+        <h1>Get Your Product Samples From China in Just One Week</h1>
+        <div class="search-container">
+            <input type="text" placeholder="What are you looking for? (e.g. Steel, Cotton)">
+            <button>Search</button>
+        </div>
+        <div class="hero-tags">
+            Popular: 
+            <span>Logistics</span>
+            <span>Agriculture</span>
+            <span>Construction</span>
+            <span>Food</span>
+        </div>
+    </header>
+
+    <!-- 3. TOGGLE SECTION -->
+    <div class="toggle-section">
+        <div class="toggle-box">
+            <div class="toggle-btn active"><i class="fa-solid fa-file-invoice"></i> Request for Quotation</div>
+            <div class="toggle-btn"><i class="fa-solid fa-truck-fast"></i> Sell On NamsteChina</div>
+        </div>
+    </div>
+
+    <!-- NEW SECTION: DASHBOARD LAYOUT (3 Columns) -->
+    <section class="dashboard-section">
+        <div class="dashboard-grid">
+            
+            <!-- LEFT COLUMN: Categories -->
+            <aside class="dash-sidebar">
+                <div class="sidebar-header">
+                    <i class="fa-solid fa-list-ul"></i> Categories
+                </div>
+                <ul class="cat-list">
+                    <li><a href="#">Auto Vehicle & Accessories <i class="fa-solid fa-chevron-right"></i></a></li>
+                    <li><a href="#">Beauty & Personal Care <i class="fa-solid fa-chevron-right"></i></a></li>
+                    <li><a href="#">Consumer Electronics <i class="fa-solid fa-chevron-right"></i></a></li>
+                    <li><a href="#">Electronic Components <i class="fa-solid fa-chevron-right"></i></a></li>
+                    <li><a href="#">Fashion Accessories <i class="fa-solid fa-chevron-right"></i></a></li>
+                    <li><a href="#">Food & Beverages <i class="fa-solid fa-chevron-right"></i></a></li>
+                    <li><a href="#">Furniture & Home Decor <i class="fa-solid fa-chevron-right"></i></a></li>
+                    <li><a href="#">Health Care <i class="fa-solid fa-chevron-right"></i></a></li>
+                    <li><a href="#">Home Appliances <i class="fa-solid fa-chevron-right"></i></a></li>
+                    <li><a href="#">Industrial Supplies <i class="fa-solid fa-chevron-right"></i></a></li>
+                </ul>
+            </aside>
+
+            <!-- MIDDLE COLUMN: Main Banner & Search -->
+            <main class="dash-main">
+                <!-- Main Banner Area -->
+                <div class="main-banner">
+                    <div class="banner-txt">
+                        
+                        <h2>One Platform</h2>
+                        <h2>China to India</h2>
+                        <p>Smarter Sourcing, Export, Import, Logisting, Solution etc.</p>
+                        <p>We are a one-stop India–China sourcing platform offering complete end-to-end solutions. Chinese manufacturers partner with us through formal MoUs, and product samples are sourced and stored at our Mumbai warehouse. Indian buyers can easily inspect and approve samples locally. After approval, we manage supplier coordination, quality testing, compliance, logistics, and final delivery—making cross-border sourcing simple, transparent, and reliable..</p>
+                        <button class="btn-primary" style="background:white; color:var(--primary-green);">View More</button>
+                    </div>
+                    
+                </div>
+
+                <!-- Bottom: "What you looking for?" -->
+                <div class="lookup-box">
+                    <h3>What are you looking for?</h3>
+                    <div class="lookup-input">
+                        <input type="text" placeholder="Enter keywords to search...">
+                        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </div>
+            </main>
+
+            <!-- RIGHT COLUMN: Recently Joined Companies -->
+            <aside class="dash-right">
+                <div class="sidebar-header">
+                    Recently Joined
+                    <a href="#" style="font-size:0.8rem; color:var(--primary-green);">See All</a>
+                </div>
+                <div class="company-list">
+                    <!-- Company A -->
+                    <div class="company-item">
+                        <div class="co-logo">A</div>
+                        <div class="co-info">
+                            <strong>Alpha Tech Ltd.</strong>
+                            <span>Consumer Electronics</span>
+                        </div>
+                    </div>
+                    <!-- Company B -->
+                    <div class="company-item">
+                        <div class="co-logo">B</div>
+                        <div class="co-info">
+                            <strong>Best Beauty Co.</strong>
+                            <span>Cosmetics</span>
+                        </div>
+                    </div>
+                    <!-- Company C -->
+                    <div class="company-item">
+                        <div class="co-logo">C</div>
+                        <div class="co-info">
+                            <strong>Core Logistics</strong>
+                            <span>Freight Services</span>
+                        </div>
+                    </div>
+                    <!-- Company D -->
+                    <div class="company-item">
+                        <div class="co-logo">D</div>
+                        <div class="co-info">
+                            <strong>Delta Fabrics</strong>
+                            <span>Apparel & Textiles</span>
+                        </div>
+                    </div>
+                    <!-- Company E -->
+                    <div class="company-item">
+                        <div class="co-logo">E</div>
+                        <div class="co-info">
+                            <strong>Echo Foods Inc.</strong>
+                            <span>Food & Beverage</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+    </section>
+
+    <!-- 4. SECTORS GRID (Existing) -->
+    <section class="section">
+        <h2 class="section-title">Wide range of product sectors</h2>
+        <div class="sectors-grid">
+            <div class="sector-card"><i class="fa-solid fa-wheat-awn"></i><h3>Agriculture</h3><p>Seeds, Equipment</p></div>
+            <div class="sector-card"><i class="fa-solid fa-shirt"></i><h3>Apparel</h3><p>Men, Women, Kids</p></div>
+            <div class="sector-card"><i class="fa-solid fa-pump-soap"></i><h3>Beauty</h3><p>Cosmetics, Skincare</p></div>
+            <div class="sector-card"><i class="fa-solid fa-flask"></i><h3>Chemicals</h3><p>Industrial, Lab</p></div>
+            <div class="sector-card"><i class="fa-solid fa-trowel-bricks"></i><h3>Construction</h3><p>Materials, Tools</p></div>
+            <div class="sector-card"><i class="fa-solid fa-mobile-screen"></i><h3>Electronics</h3><p>Phones, Laptops</p></div>
+            <div class="sector-card"><i class="fa-solid fa-plug"></i><h3>Electrical</h3><p>Wiring, Batteries</p></div>
+            <!-- Last Card Green -->
+            <div class="sector-card blue-card">
+                <h3>+24</h3>
+                <p>Categories with active Suppliers worldwide</p>
+                <button>View All <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. FEATURE TABS (Existing) -->
+    
+<section class="section">
+    <h2 class="section-title">One platform for all your business needs</h2>
+    
+    <!-- Tab Navigation -->
+    <div class="features-tabs">
+        <div class="tab active" data-tab="marketplace">B2B Marketplace</div>
+        <div class="tab" data-tab="freight">Freight Solutions</div>
+        <div class="tab" data-tab="customs">Customs Clearance</div>
+        <div class="tab" data-tab="carbon">Carbon Calc</div>
+    </div>
+
+    <!-- Content Block 1: B2B Marketplace -->
+    <div class="feature-content active" id="marketplace">
+        <div class="feature-text">
+            <h2>Connect with global suppliers instantly.</h2>
+            <p>Our marketplace allows you to find verified suppliers from India and China. Secure payments, trade assurance, and verified quality checks ensure your business runs smoothly.</p>
+            <button class="btn-primary">Explore Marketplace</button>
+        </div>
+        <div class="feature-img">
+            <img src="https://via.placeholder.com/600x400/E8F5E9/004D40?text=B2B+Marketplace+UI" alt="Marketplace Dashboard">
+        </div>
+    </div>
+
+    <!-- Content Block 2: Freight Solutions -->
+    <div class="feature-content" id="freight">
+        <div class="feature-text">
+            <h2>Seamless Logistics & Shipping.</h2>
+            <p>Compare rates from top carriers for air, ocean, and land freight. Track your shipments in real-time from the warehouse in Shenzhen to your doorstep in Mumbai.</p>
+            <button class="btn-primary">Get Shipping Quotes</button>
+        </div>
+        <div class="feature-img">
+            <img src="https://via.placeholder.com/600x400/E3F2FD/0D47A1?text=Freight+Tracking+UI" alt="Freight Dashboard">
+        </div>
+    </div>
+
+    <!-- Content Block 3: Customs Clearance -->
+    <div class="feature-content" id="customs">
+        <div class="feature-text">
+            <h2>Hassle-free Documentation.</h2>
+            <p>Navigate complex import/export regulations effortlessly. Our AI-driven system assists with HS Codes, duty calculation, and filing necessary paperwork for Indian and Chinese customs.</p>
+            <button class="btn-primary">Check Compliance</button>
+        </div>
+        <div class="feature-img">
+            <img src="https://via.placeholder.com/600x400/FFF3E0/E65100?text=Customs+Documents+UI" alt="Customs Dashboard">
+        </div>
+    </div>
+
+    <!-- Content Block 4: Carbon Calc -->
+    <div class="feature-content" id="carbon">
+        <div class="feature-text">
+            <h2>Sustainable Trade Insights.</h2>
+            <p>Calculate the carbon footprint of your supply chain. Make eco-friendly shipping choices and generate sustainability reports to meet global environmental standards.</p>
+            <button class="btn-primary">Calculate Footprint</button>
+        </div>
+        <div class="feature-img">
+            <img src="https://via.placeholder.com/600x400/F1F8E9/33691E?text=Carbon+Calculator+UI" alt="Carbon Calculator">
+        </div>
+    </div>
+
+</section>
+
+    <!-- 6. FREIGHT QUOTES (Existing) -->
+    <section class="section">
+        <h2 class="section-title">Instant Freight Quotes</h2>
+        <div class="freight-container">
+            <div class="freight-inputs">
+                <div class="input-group">
+                    <label>Ship From</label>
+                    <input type="text" value="New York, USA">
+                </div>
+                <div class="input-group">
+                    <label>Ship To</label>
+                    <input type="text" value="Shanghai, China">
+                </div>
+                <div class="input-group">
+                    <label>Weight (kg)</label>
+                    <input type="number" value="500">
+                </div>
+                <button class="btn-primary">Get Quotes</button>
+            </div>
+            <div class="freight-cards">
+                <div class="quote-card">
+                    <div>
+                        <h3>Maersk Line</h3>
+                        <p>20-25 Days</p>
+                    </div>
+                    <div class="quote-price">$4,500</div>
+                </div>
+                <div class="quote-card">
+                    <div>
+                        <h3>Hapag-Lloyd</h3>
+                        <p>18-22 Days</p>
+                    </div>
+                    <div class="quote-price">$4,650</div>
+                </div>
+                <div class="quote-card">
+                    <div>
+                        <h3>MSC</h3>
+                        <p>25-30 Days</p>
+                    </div>
+                    <div class="quote-price">$4,200</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. TRENDING ITEMS (Existing) -->
+    <section class="section">
+        <h2 class="section-title">Latest trending items</h2>
+        <div class="scroll-container">
+            <div class="product-card">
+                <div class="p-img"><img src="https://via.placeholder.com/200?text=Steel" alt="Steel"></div>
+                <div class="p-info">
+                    <h4>Industrial Steel Pipes</h4>
+                    <div class="p-row">
+                        <div class="origin"><i class="fa-solid fa-flag-usa"></i> <span>USA</span></div>
+                        <div class="price">$12.00 / kg</div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="p-img"><img src="https://via.placeholder.com/200?text=Cotton" alt="Cotton"></div>
+                <div class="p-info">
+                    <h4>Organic Raw Cotton</h4>
+                    <div class="p-row">
+                        <div class="origin"><i class="fa-solid fa-leaf"></i> <span>Egypt</span></div>
+                        <div class="price">$2.50 / kg</div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="p-img"><img src="https://via.placeholder.com/200?text=Coffee" alt="Coffee"></div>
+                <div class="p-info">
+                    <h4>Arabica Coffee Beans</h4>
+                    <div class="p-row">
+                        <div class="origin"><i class="fa-solid fa-mug-hot"></i> <span>Brazil</span></div>
+                        <div class="price">$15.00 / kg</div>
+                    </div>
+                </div>
+            </div>
+             <div class="product-card">
+                <div class="p-img"><img src="https://via.placeholder.com/200?text=Solar" alt="Solar"></div>
+                <div class="p-info">
+                    <h4>Solar Panels 500W</h4>
+                    <div class="p-row">
+                        <div class="origin"><i class="fa-solid fa-sun"></i> <span>China</span></div>
+                        <div class="price">$120.00 / unit</div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="p-img"><img src="https://via.placeholder.com/200?text=Lumber" alt="Lumber"></div>
+                <div class="p-info">
+                    <h4>Pine Lumber Wood</h4>
+                    <div class="p-row">
+                        <div class="origin"><i class="fa-solid fa-tree"></i> <span>Canada</span></div>
+                        <div class="price">$8.50 / ft</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. SOURCING STEPS (Existing) -->
+    <section class="section">
+        <h2 class="section-title">Efficient product sourcing</h2>
+        <div class="sourcing-steps">
+            <div class="step-list">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div>
+                        <h3>Create Request</h3>
+                        <p>Fill out a simple form in 1 minute.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div>
+                        <h3>Get Quotes</h3>
+                        <p>Receive offers from verified sellers.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div>
+                        <h3>Order & Delivery</h3>
+                        <p>Negotiate and choose the best offer.</p>
+                    </div>
+                </div>
+                <button class="btn-primary" style="width: fit-content;">Get Started</button>
+            </div>
+            <div class="sourcing-img">
+                <img src="https://via.placeholder.com/500x400/fff/ccc?text=Sourcing+Form+UI" alt="Sourcing UI" style="width:100%; border-radius:10px;">
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. CALENDAR (Existing) -->
+    <section class="section">
+        <h2 class="section-title">Trade show calendar</h2>
+        <div class="split-section">
+            <div class="green-box">
+                <h2>Use our event calendar</h2>
+                <p>Plan your shipments to coincide with major global trade events.</p>
+                <button class="btn-primary" style="background:white; color:var(--primary-green); margin-top:20px;">Browse All</button>
+            </div>
+            <div class="event-grid">
+                <div class="event-card">
+                    <h4>Paris Fashion Week</h4>
+                    <p style="font-size:0.9rem; color:#666; margin-top:5px;">🇫🇷 France • Sept 2026</p>
+                </div>
+                <div class="event-card">
+                    <h4>Tech Expo Berlin</h4>
+                    <p style="font-size:0.9rem; color:#666; margin-top:5px;">🇩🇪 Germany • Oct 2026</p>
+                </div>
+                <div class="event-card">
+                    <h4>Canton Fair</h4>
+                    <p style="font-size:0.9rem; color:#666; margin-top:5px;">🇨🇳 China • Nov 2026</p>
+                </div>
+                <div class="event-card">
+                    <h4>CES Las Vegas</h4>
+                    <p style="font-size:0.9rem; color:#666; margin-top:5px;">🇺🇸 USA • Jan 2027</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. INSIGHTS (Existing) -->
+    <section class="section">
+        <h2 class="section-title">The latest from Insights</h2>
+        <div class="sectors-grid" style="grid-template-columns: 1fr 2fr 1fr;">
+            <div class="sector-card" style="display:flex; flex-direction:column; justify-content:center;">
+                <h1 style="font-size:3rem; color:var(--primary-green);">128+</h1>
+                <p>Countries supported by our logistics network.</p>
+            </div>
+            <div class="sector-card" style="background: var(--primary-green); color: white;">
+                <span style="background:rgba(255,255,255,0.2); padding:5px 10px; border-radius:20px; font-size:0.8rem;">Featured</span>
+                <h2 style="margin-top:20px;">From Field to Fashion: Why Cotton Still Matters</h2>
+                <p style="margin-top:10px; opacity:0.8;">Read Article <i class="fa-solid fa-arrow-right"></i></p>
+            </div>
+            <div class="sector-card" style="display:flex; flex-direction:column; justify-content:center;">
+                <h1 style="font-size:3rem; color:var(--primary-green);">366+</h1>
+                <p>Freight partners globally ensuring on-time delivery.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. BOTTOM CTA (Existing) -->
+    <div class="cta-section">
+        <h2>Join NamsteChina to grow your business today!</h2>
+        <div class="cta-buttons">
+            <button class="btn-large btn-fill">Join as Buyer</button>
+            <button class="btn-large btn-outline">Join as Supplier</button>
+        </div>
+    </div>
+
+    <!-- 12. FOOTER (Existing) -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="color:white; margin-bottom:20px;">
+                    <i class="fa-solid fa-earth-americas"></i> NamsteChina.org
+                </div>
+                <p style="opacity:0.7; font-size:0.9rem;">Connecting global trade through technology and trust.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product Sectors</h4>
+                <ul>
+                    <li>Agriculture</li>
+                    <li>Apparel</li>
+                    <li>Electronics</li>
+                    <li>Construction</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li>About Us</li>
+                    <li>Careers</li>
+                    <li>Press</li>
+                    <li>Contact</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Social Media</h4>
+                <ul>
+                    <li><i class="fa-brands fa-linkedin"></i> LinkedIn</li>
+                    <li><i class="fa-brands fa-twitter"></i> Twitter</li>
+                    <li><i class="fa-brands fa-instagram"></i> Instagram</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 NamsteChina . All rights reserved.
+        </div>
+    </footer>
+
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.feature-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // 1. Remove 'active' class from all tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                
+                // 2. Add 'active' class to clicked tab
+                tab.classList.add('active');
+
+                // 3. Hide all content blocks
+                contents.forEach(content => content.classList.remove('active'));
+
+                // 4. Show the content that matches the data-tab attribute
+                const targetId = tab.getAttribute('data-tab');
+                const targetContent = document.getElementById(targetId);
+                targetContent.classList.add('active');
+            });
+        });
+    });
+</script>
+
+</html>
