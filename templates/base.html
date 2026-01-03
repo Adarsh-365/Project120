@@ -3,24 +3,29 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MiniShop</title>
+    <title>NamsteChina Global B2B Platform</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css" />
   </head>
   <body>
+    <!-- 1. NAVBAR -->
     <nav class="navbar">
-      <div class="brand"><a href="{{ url_for('index') }}">MiniShop</a></div>
-      <div class="nav-links">
-        {% if session.get('username') %}
-          <span>Hello, {{ session.get('username') }}</span>
-          {% if session.get('role') == 'merchant' %}
-            <a href="{{ url_for('merchant_dashboard') }}">Merchant Dashboard</a>
-          {% endif %}
-          <a href="{{ url_for('logout') }}">Logout</a>
-        {% else %}
-          <a href="{{ url_for('login') }}">Login</a>
-          <a href="{{ url_for('signup') }}">Sign Up</a>
-        {% endif %}
-      </div>
+        <div class="logo">
+            <i class="fa-solid fa-earth-americas"></i> NamsteChina.org
+        </div>
+        <ul class="nav-links">
+            <li>Home</li>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+            <li>Our Partners</li>
+            <li>Contact Us</li>
+        </ul>
+        <div class="auth-buttons">
+            <button class="btn-text">Log In</button>
+            <button class="btn-primary">Join Free</button>
+        </div>
     </nav>
 
     <main class="container">
@@ -36,5 +41,47 @@
 
       {% block content %}{% endblock %}
     </main>
+
+    <!-- 12. FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="color:white; margin-bottom:20px;">
+                    <i class="fa-solid fa-earth-americas"></i> NamsteChina.org
+                </div>
+                <p style="opacity:0.7; font-size:0.9rem;">Connecting global trade through technology and trust.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product Sectors</h4>
+                <ul>
+                    <li>Agriculture</li>
+                    <li>Apparel</li>
+                    <li>Electronics</li>
+                    <li>Construction</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li>About Us</li>
+                    <li>Careers</li>
+                    <li>Press</li>
+                    <li>Contact</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Social Media</h4>
+                <ul>
+                    <li><i class="fa-brands fa-linkedin"></i> LinkedIn</li>
+                    <li><i class="fa-brands fa-twitter"></i> Twitter</li>
+                    <li><i class="fa-brands fa-instagram"></i> Instagram</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 NamsteChina . All rights reserved.
+        </div>
+    </footer>
+    <script src="/static/script.js"></script>
   </body>
 </html>
