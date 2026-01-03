@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canton Fair 2026 - NamsteChina</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. GLOBAL RESET & VARIABLES (SAME AS PREVIOUS) --- */
+        :root {
+            --primary-green: #004D40;  /* Deep Forest Green */
+            --accent-green: #00E676;   /* Bright Lime */
+            --light-mint: #E0F2F1;     /* Section Backgrounds */
+            --white: #ffffff;
+            --text-dark: #263238;
+            --text-grey: #546e7a;
+            --transition: all 0.3s ease;
+            --danger: #d32f2f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: #f9f9f9;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- 2. NAVBAR --- */
+        .navbar {
+            background: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .nav-links li:hover { color: var(--primary-green); cursor: pointer; }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-text {
+            background: none;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover { background-color: #00352c; transform: translateY(-2px); }
+
+        /* --- 3. HERO HEADER --- */
+        .page-header {
+            background: linear-gradient(rgba(0, 77, 64, 0.9), rgba(0, 77, 64, 0.9)), url('https://via.placeholder.com/1600x600/004D40/fff?text=Canton+Fair+Exhibition+Center');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .page-header h1 { font-size: 3rem; margin-bottom: 15px; font-weight: 700; }
+        .page-header h2 { font-size: 1.5rem; font-weight: 400; margin-bottom: 20px; color: var(--accent-green); }
+        .page-header p { font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
+
+        /* --- 4. GENERAL SECTIONS --- */
+        .content-section { padding: 60px 10%; background: white; }
+        .content-section.alt-bg { background: var(--light-mint); }
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        .section-title {
+            color: var(--primary-green);
+            font-size: 2rem;
+            margin-bottom: 40px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* --- 5. PHASE CARDS --- */
+        .phases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .phase-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .phase-header {
+            background: var(--primary-green);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .phase-header h3 { font-size: 1.5rem; margin-bottom: 5px; }
+        .phase-header span { font-size: 0.9rem; opacity: 0.9; }
+
+        .phase-body { padding: 25px; }
+        .phase-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.95rem;
+            color: var(--text-grey);
+        }
+        .phase-list li::before {
+            content: '•';
+            color: var(--accent-green);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* --- 6. PRICING BOX --- */
+        .pricing-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border: 2px solid var(--primary-green);
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .price-tag {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-green);
+            margin: 20px 0;
+        }
+        
+        .price-details {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        .price-pill {
+            background: var(--light-mint);
+            padding: 5px 15px;
+            border-radius: 20px;
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        /* --- 7. ITINERARY TIMELINE --- */
+        .itinerary-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .timeline-date {
+            min-width: 120px;
+            text-align: right;
+        }
+        .date-box {
+            background: var(--primary-green);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            display: inline-block;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .date-sub {
+            display: block;
+            font-size: 0.75rem;
+            margin-top: 5px;
+            color: #666;
+        }
+        .timeline-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-green);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            flex: 1;
+        }
+        .timeline-content h4 { margin-bottom: 5px; color: var(--primary-green); }
+        .timeline-content p { font-size: 0.9rem; color: var(--text-grey); }
+
+        /* --- 8. INCLUSIONS / EXCLUSIONS --- */
+        .inc-exc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .list-box h3 { margin-bottom: 20px; font-size: 1.2rem; }
+        .check-list li { margin-bottom: 10px; display: flex; align-items: start; gap: 10px; font-size: 0.95rem; }
+        .check-list li i { color: var(--primary-green); margin-top: 4px; }
+        
+        .cross-list li { margin-bottom: 10px; display: flex; align-items: start; gap: 10px; font-size: 0.95rem; }
+        .cross-list li i { color: var(--danger); margin-top: 4px; }
+
+        /* --- 9. NOTES --- */
+        .notes-box {
+            background: #fff3e0;
+            border-left: 5px solid #ff9800;
+            padding: 20px;
+            margin-top: 40px;
+            border-radius: 5px;
+        }
+        .notes-box h4 { color: #e65100; margin-bottom: 10px; }
+        .notes-box ul { list-style: disc; padding-left: 20px; color: #555; font-size: 0.9rem; }
+
+        /* --- 10. FOOTER --- */
+        footer {
+            background: var(--primary-green);
+            color: white;
+            padding: 60px 10% 20px;
+        }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-col h4 { margin-bottom: 20px; font-size: 1.1rem; }
+        .footer-col ul li { margin-bottom: 10px; opacity: 0.8; cursor: pointer; }
+        .footer-col ul li:hover { opacity: 1; text-decoration: underline; }
+        .copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 0.9rem; opacity: 0.6; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 15px; }
+            .nav-links { display: none; }
+            .page-header h1 { font-size: 2rem; }
+            .inc-exc-grid { grid-template-columns: 1fr; }
+            .timeline-item { flex-direction: column; gap: 5px; }
+            .timeline-date { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. NAVBAR -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-earth-americas"></i> NamsteChina.org
+        </a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/canton-fair" style="color:var(--primary-green);">Canton Fair</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+        <div class="auth-buttons">
+            <button class="btn-text">Log In</button>
+            <button class="btn-primary">Join Free</button>
+        </div>
+    </nav>
+
+    <!-- 2. HERO -->
+    <header class="page-header">
+        <h2>Special Business Package</h2>
+        <h1>Canton Fair 2026 - Guangzhou</h1>
+        <p>Join India's No. 1 Delegation for the world's largest import-export exhibition.</p>
+        <div style="margin-top: 30px;">
+            <span class="btn-primary" style="background: white; color: var(--primary-green); margin: 0 10px;">April 23 - 29</span>
+            <span class="btn-primary" style="background: transparent; border: 2px solid white; margin: 0 10px;">Apr 30 - May 7</span>
+        </div>
+    </header>
+
+    <!-- 3. ABOUT EXHIBITION -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">About The Exhibition</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; color:var(--text-grey);">
+                The China Import and Export Fair (Canton Fair) is the pinnacle of international trade events. Held in Guangzhou, it attracts buyers from all over the world. With over 25,000 exhibitors, this is the ultimate destination for sourcing products directly from manufacturers.
+            </p>
+
+            <div class="phases-grid">
+                <!-- Phase 2 -->
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <h3>Phase 2</h3>
+                        <span>April 23 - 27, 2026</span>
+                    </div>
+                    <div class="phase-body">
+                        <ul class="phase-list">
+                            <li>Kitchenware & Tableware</li>
+                            <li>Household Items & Ceramics</li>
+                            <li>Home Decorations & Gifts</li>
+                            <li>Building & Decorative Materials</li>
+                            <li>Furniture & Sanitary Equipment</li>
+                            <li>Clocks, Watches & Optical Instruments</li>
+                            <li>Gardening Products</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="phase-card">
+                    <div class="phase-header">
+                        <h3>Phase 3</h3>
+                        <span>May 1 - 5, 2026</span>
+                    </div>
+                    <div class="phase-body">
+                        <ul class="phase-list">
+                            <li>Textiles, Fabrics & Carpets</li>
+                            <li>Men's, Women's & Kids Clothing</li>
+                            <li>Shoes, Bags & Suitcases</li>
+                            <li>Food & Rural Revitalization</li>
+                            <li>Medicines & Health Products</li>
+                            <li>Personal Care Appliances</li>
+                            <li>Office Supplies & Toys</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. PACKAGE PRICING -->
+    <section class="content-section alt-bg">
+        <div class="container">
+            <h2 class="section-title">Exclusive Package Pricing</h2>
+            
+            <div class="pricing-section">
+                <h3>6 Nights / 6 Days Package</h3>
+                <p>Accommodation: <strong>Liz Hotel Panyu District</strong> (05 Star or Similar)</p>
+                
+                <div class="price-tag">INR 1,20,000</div>
+                <p style="margin-bottom: 20px; font-size: 0.9rem; color: #666;">Per Person on Twin Sharing Basis</p>
+
+                <div class="price-details">
+                    <div class="price-pill">+ INR 22,000 Single Supplement</div>
+                    <div class="price-pill">+ INR 12,000 Visa Cost</div>
+                </div>
+
+                <button class="btn-primary" style="padding: 15px 40px; font-size: 1.1rem;">Book Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. ITINERARY -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Tour Itinerary</h2>
+            
+            <!-- Dates Toggle Label -->
+            <div style="text-align: center; margin-bottom: 30px;">
+                <span style="background:var(--primary-green); color:white; padding: 5px 15px; border-radius: 4px; font-size: 0.9rem;">Phase 2 Dates Shown</span>
+            </div>
+
+            <div class="itinerary-container">
+                <!-- Day 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <span class="date-box">Day 01</span>
+                        <span class="date-sub">22 Apr / 30 Apr</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h4>Depart Mumbai</h4>
+                        <p>Departure from Mumbai International Airport. Flight to Guangzhou.</p>
+                    </div>
+                </div>
+
+                <!-- Day 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <span class="date-box">Day 02</span>
+                        <span class="date-sub">23 Apr / 01 May</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h4>Arrive in Guangzhou</h4>
+                        <p>Arrival, Transfer to Hotel. Evening Indian Dinner at an Indian Restaurant. Overnight stay at Hotel.</p>
+                    </div>
+                </div>
+
+                <!-- Day 3 to 7 (Grouped) -->
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <span class="date-box">Day 03 - 07</span>
+                        <span class="date-sub">Fair Days</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h4>Full Day Canton Fair Visit</h4>
+                        <p>Daily Breakfast at Hotel. Transfer to Canton Fair Complex. Explore thousands of suppliers. Evening Indian Dinner. Overnight stay.</p>
+                    </div>
+                </div>
+
+                <!-- Day 8 -->
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <span class="date-box">Day 08</span>
+                        <span class="date-sub">29 Apr / 07 May</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h4>Departure</h4>
+                        <p>Breakfast. Check out from Hotel. Transfer to Airport. Flight back to Mumbai.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. INCLUSIONS & EXCLUSIONS -->
+    <section class="content-section alt-bg">
+        <div class="container">
+            <div class="inc-exc-grid">
+                <!-- Inclusions -->
+                <div class="list-box">
+                    <h3 style="color:var(--primary-green);">Package Inclusions</h3>
+                    <ul class="check-list">
+                        <li><i class="fa-solid fa-check"></i> Return Economy Airfare (Premium Airlines)</li>
+                        <li><i class="fa-solid fa-check"></i> Normal China Single Entry Group Visa</li>
+                        <li><i class="fa-solid fa-check"></i> 06 Nights Accommodation (5 Star)</li>
+                        <li><i class="fa-solid fa-check"></i> Daily Buffet Breakfast & Indian Dinner</li>
+                        <li><i class="fa-solid fa-check"></i> Airport & Fairground Transfers</li>
+                        <li><i class="fa-solid fa-check"></i> Overseas Travel Insurance (upto 55 yrs)</li>
+                        <li><i class="fa-solid fa-check"></i> 1 International SIM Card & Travel Kit</li>
+                        <li><i class="fa-solid fa-check"></i> English Speaking Local Tour Guide</li>
+                    </ul>
+                </div>
+
+                <!-- Exclusions -->
+                <div class="list-box">
+                    <h3 style="color:var(--danger);">Package Exclusions</h3>
+                    <ul class="cross-list">
+                        <li><i class="fa-solid fa-xmark"></i> Lunch on all days</li>
+                        <li><i class="fa-solid fa-xmark"></i> GST @ 5% & TCS @ 5% on total cost</li>
+                        <li><i class="fa-solid fa-xmark"></i> Customary Gratuities (Tips) - USD 25</li>
+                        <li><i class="fa-solid fa-xmark"></i> Personal expenses (Laundry, Minibar, etc)</li>
+                        <li><i class="fa-solid fa-xmark"></i> Any items not mentioned in inclusions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Important Notes -->
+            <div class="notes-box">
+                <h4><i class="fa-solid fa-circle-exclamation"></i> Important Terms & Conditions</h4>
+                <ul>
+                    <li>Booking Deposit: ₹60,000 (Non-refundable). Full payment 30 days prior.</li>
+                    <li>Cost based on ROE: 1 USD = ₹85.00. Any fluctuation will be charged extra.</li>
+                    <li>Group size minimum 20 adults.</li>
+                    <li>Passport must be valid for travel. Visa rejection refund subject to service charges.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="color:white; margin-bottom:20px;">
+                    <i class="fa-solid fa-earth-americas"></i> NamsteChina.org
+                </div>
+                <p style="opacity:0.7; font-size:0.9rem;">Connecting global trade through technology and trust.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li>Home</li>
+                    <li>About Us</li>
+                    <li>Canton Fair 2026</li>
+                    <li>Contact</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li>Mumbai, India</li>
+                    <li>Guangzhou, China</li>
+                    <li>support@namastechina.org</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Social Media</h4>
+                <ul>
+                    <li><i class="fa-brands fa-linkedin"></i> LinkedIn</li>
+                    <li><i class="fa-brands fa-twitter"></i> Twitter</li>
+                    <li><i class="fa-brands fa-instagram"></i> Instagram</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 NamsteChina. All rights reserved. #KeepMovingKeepTravell
+        </div>
+    </footer>
+
+</body>
+</html>

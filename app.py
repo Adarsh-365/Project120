@@ -10,6 +10,11 @@ def about():
     return render_template("aboutus.html")
 
 
+@app.route("/canton-fair")
+def canton_fair():
+    return render_template("cantonfair.html")
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
