@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- 1. GLOBAL RESET & VARIABLES (SAME AS PREVIOUS) --- */
+        /* --- 1. GLOBAL RESET & VARIABLES --- */
         :root {
             --primary-green: #004D40;  /* Deep Forest Green */
             --accent-green: #00E676;   /* Bright Lime */
@@ -100,7 +100,7 @@
 
         /* --- 3. HERO HEADER --- */
         .page-header {
-            background: linear-gradient(rgba(0, 77, 64, 0.9), rgba(0, 77, 64, 0.9)), url('https://via.placeholder.com/1600x600/004D40/fff?text=Canton+Fair+Exhibition+Center');
+            background: linear-gradient(rgba(0, 77, 64, 0.9), rgba(0, 77, 64, 0.9)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
             color: white;
@@ -241,7 +241,51 @@
         .timeline-content h4 { margin-bottom: 5px; color: var(--primary-green); }
         .timeline-content p { font-size: 0.9rem; color: var(--text-grey); }
 
-        /* --- 8. INCLUSIONS / EXCLUSIONS --- */
+        /* --- 8. GALLERY SECTION --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,77,64, 0.9));
+            padding: 20px;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* --- 9. INCLUSIONS / EXCLUSIONS --- */
         .inc-exc-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -254,7 +298,7 @@
         .cross-list li { margin-bottom: 10px; display: flex; align-items: start; gap: 10px; font-size: 0.95rem; }
         .cross-list li i { color: var(--danger); margin-top: 4px; }
 
-        /* --- 9. NOTES --- */
+        /* --- 10. NOTES --- */
         .notes-box {
             background: #fff3e0;
             border-left: 5px solid #ff9800;
@@ -265,7 +309,7 @@
         .notes-box h4 { color: #e65100; margin-bottom: 10px; }
         .notes-box ul { list-style: disc; padding-left: 20px; color: #555; font-size: 0.9rem; }
 
-        /* --- 10. FOOTER --- */
+        /* --- 11. FOOTER --- */
         footer {
             background: var(--primary-green);
             color: white;
@@ -377,7 +421,7 @@
                 <h3>6 Nights / 6 Days Package</h3>
                 <p>Accommodation: <strong>Liz Hotel Panyu District</strong> (05 Star or Similar)</p>
                 
-                <div class="price-tag">INR 1,20,000</div>
+                <div class="price-tag">INR 1,30,000</div>
                 <p style="margin-bottom: 20px; font-size: 0.9rem; color: #666;">Per Person on Twin Sharing Basis</p>
 
                 <div class="price-details">
@@ -397,7 +441,7 @@
             
             <!-- Dates Toggle Label -->
             <div style="text-align: center; margin-bottom: 30px;">
-                <span style="background:var(--primary-green); color:white; padding: 5px 15px; border-radius: 4px; font-size: 0.9rem;">Phase 2 Dates Shown</span>
+                <span style="background:var(--primary-green); color:white; padding: 5px 15px; border-radius: 4px; font-size: 0.9rem;">Phase 2 & 3 Dates Shown</span>
             </div>
 
             <div class="itinerary-container">
@@ -451,9 +495,10 @@
             </div>
         </div>
     </section>
+    
 
     <!-- 6. INCLUSIONS & EXCLUSIONS -->
-    <section class="content-section alt-bg">
+    <section class="content-section">
         <div class="container">
             <div class="inc-exc-grid">
                 <!-- Inclusions -->
@@ -488,15 +533,74 @@
             <div class="notes-box">
                 <h4><i class="fa-solid fa-circle-exclamation"></i> Important Terms & Conditions</h4>
                 <ul>
-                    <li>Booking Deposit: ₹60,000 (Non-refundable). Full payment 30 days prior.</li>
-                    <li>Cost based on ROE: 1 USD = ₹85.00. Any fluctuation will be charged extra.</li>
-                    <li>Group size minimum 20 adults.</li>
+                    <li>Booking Deposit: ₹50,000 (Non-refundable). Full payment 30 days prior.</li>
+                    <li>Cost based on ROE: 1 USD = ₹90.00. Any fluctuation will be charged extra.</li>
+                    <li>Group size minimum 10 adults.</li>
                     <li>Passport must be valid for travel. Visa rejection refund subject to service charges.</li>
                 </ul>
             </div>
         </div>
     </section>
+    
+    <!-- 5.5 GALLERY / GLIMPSES (NEW) -->
+    <section class="content-section alt-bg">
+        <div class="container">
+            <h2 class="section-title">Glimpses of Previous Fairs</h2>
+            <p style="text-align: center; color: var(--text-grey); margin-bottom: 20px;">
+                Experience the scale and magnitude of the world's largest trade exhibition.
+            </p>
 
+            <div class="gallery-grid">
+                <!-- Image 1: Main Hall -->
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/Ex5.jpeg') }}" alt="Exhibition Hall Crowds">
+                    <div class="gallery-overlay">
+                        <h4></h4>
+                    </div>
+                </div>
+
+                <!-- Image 2: Business Meeting -->
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/Ex1.jpeg') }}" alt="Business Meeting">
+                    <div class="gallery-overlay">
+                        <h4></h4>
+                    </div>
+                </div>
+
+                <!-- Image 3: Electronics / Showcase -->
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/Ex6.png') }}" alt="Tech Showcase">
+                    <div class="gallery-overlay">
+                        <h4></h4>
+                    </div>
+                </div>
+
+                <!-- Image 4: Furniture/Decor -->
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/Ex2.jpeg') }}" alt="Furniture Display">
+                    <div class="gallery-overlay">
+                        <h4></h4>
+                    </div>
+                </div>
+
+                <!-- Image 5: Textiles -->
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/Ex3.jpeg') }}" alt="Shopping and Sourcing">
+                    <div class="gallery-overlay">
+                        <h4></h4>
+                    </div>
+                </div>
+
+                <!-- Image 6: Networking -->
+                <div class="gallery-item">
+                    <img src="{{ url_for('static', filename='images/Ex4.jpeg') }}" alt="Global Networking">
+                    <div class="gallery-overlay">
+                        <h4></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- 7. FOOTER -->
     <footer>
         <div class="footer-grid">
