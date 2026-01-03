@@ -195,13 +195,16 @@
 
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 260px 1fr 280px; /* Left Sidebar | Main | Right Sidebar */
+            /* Grid Areas allow us to reorder easily on mobile */
+            grid-template-columns: 260px 1fr 280px; 
+            grid-template-areas: "sidebar main rightbar";
             gap: 20px;
             align-items: start;
         }
 
         /* LEFT SIDEBAR */
         .dash-sidebar {
+            grid-area: sidebar;
             background: white;
             border-radius: 8px;
             border: 1px solid #eee;
@@ -241,6 +244,7 @@
 
         /* MIDDLE MAIN AREA */
         .dash-main {
+            grid-area: main;
             display: flex;
             flex-direction: column;
             gap: 20px;
@@ -331,10 +335,12 @@
 
         /* RIGHT SIDEBAR */
         .dash-right {
+            grid-area: rightbar;
             background: white;
             border-radius: 8px;
             border: 1px solid #eee;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            height: fit-content;
         }
 
         .company-list { padding: 10px; }
@@ -368,7 +374,7 @@
 
         /* --- 6. SECTORS GRID --- */
         .section {
-            padding: 60px 5%; /* Aligned with dashboard padding */
+            padding: 60px 5%;
             margin-bottom: 20px;
         }
         
@@ -441,6 +447,7 @@
             gap: 30px;
             border-bottom: 2px solid #eee;
             margin-bottom: 30px;
+            overflow-x: auto; /* Handle scroll on small mobile */
         }
 
         .tab {
@@ -448,6 +455,7 @@
             color: var(--text-grey);
             cursor: pointer;
             font-weight: 600;
+            white-space: nowrap;
         }
 
         .tab.active {
@@ -455,13 +463,25 @@
             border-bottom: 3px solid var(--primary-green);
         }
 
+        /* TAB FIX: Hide content by default */
         .feature-content {
-            display: flex;
+            display: none; /* Hidden by default */
             gap: 50px;
             background: var(--light-mint);
             padding: 40px;
             border-radius: 20px;
             align-items: center;
+        }
+
+        /* TAB FIX: Show content when active */
+        .feature-content.active {
+            display: flex; 
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .feature-text { flex: 1; }
@@ -675,12 +695,32 @@
 
         /* RESPONSIVE */
         @media (max-width: 992px) {
-            .dashboard-grid { grid-template-columns: 1fr; }
-            .dash-sidebar, .dash-right { display: none; } /* On Mobile, Stack or Hide sidebars */
+            /* Fix for Dashboard Layout on Mobile */
+            .dashboard-grid { 
+                grid-template-columns: 1fr; /* Single column */
+                grid-template-areas: 
+                    "main"
+                    "sidebar"
+                    "rightbar"; /* Reorder: Main first, then Sidebar, then Rightbar */
+            }
+            
+            /* Ensure sidebars are visible on mobile */
+            .dash-sidebar, .dash-right { 
+                display: block; 
+                width: 100%;
+            }
+
             .main-banner { flex-direction: column; text-align: center; }
             .banner-txt { padding-right: 0; margin-bottom: 20px; }
             .lookup-box { flex-direction: column; align-items: stretch; }
+            
+            /* Feature content stacking */
+            .feature-content { flex-direction: column; }
+            .feature-img { width: 100%; margin-top: 20px; }
+            
+            .freight-inputs { grid-template-columns: 1fr; }
         }
+
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
             .split-section { grid-template-columns: 1fr; }
@@ -688,6 +728,7 @@
             .search-container { flex-direction: column; border-radius: 20px; }
             .search-container input { border-radius: 20px; }
             .search-container button { width: 100%; border-radius: 20px; margin-top: 10px; }
+            .cta-buttons { flex-direction: column; }
         }
     </style>
 </head>
@@ -836,7 +877,7 @@
         </div>
     </section>
 
-    <!-- 4. SECTORS GRID (Existing) -->
+    <!-- 4. SECTORS GRID -->
     <section class="section">
         <h2 class="section-title">Wide range of product sectors</h2>
         <div class="sectors-grid">
@@ -856,70 +897,69 @@
         </div>
     </section>
 
-    <!-- 5. FEATURE TABS (Existing) -->
-    
-<section class="section">
-    <h2 class="section-title">One platform for all your business needs</h2>
-    
-    <!-- Tab Navigation -->
-    <div class="features-tabs">
-        <div class="tab active" data-tab="marketplace">B2B Marketplace</div>
-        <div class="tab" data-tab="freight">Freight Solutions</div>
-        <div class="tab" data-tab="customs">Customs Clearance</div>
-        <div class="tab" data-tab="carbon">Carbon Calc</div>
-    </div>
+    <!-- 5. FEATURE TABS (FIXED) -->
+    <section class="section">
+        <h2 class="section-title">One platform for all your business needs</h2>
+        
+        <!-- Tab Navigation -->
+        <div class="features-tabs">
+            <div class="tab active" data-tab="marketplace">B2B Marketplace</div>
+            <div class="tab" data-tab="freight">Freight Solutions</div>
+            <div class="tab" data-tab="customs">Customs Clearance</div>
+            <div class="tab" data-tab="carbon">Carbon Calc</div>
+        </div>
 
-    <!-- Content Block 1: B2B Marketplace -->
-    <div class="feature-content active" id="marketplace">
-        <div class="feature-text">
-            <h2>Connect with global suppliers instantly.</h2>
-            <p>Our marketplace allows you to find verified suppliers from India and China. Secure payments, trade assurance, and verified quality checks ensure your business runs smoothly.</p>
-            <button class="btn-primary">Explore Marketplace</button>
+        <!-- Content Block 1: B2B Marketplace -->
+        <div class="feature-content active" id="marketplace">
+            <div class="feature-text">
+                <h2>Connect with global suppliers instantly.</h2>
+                <p>Our marketplace allows you to find verified suppliers from India and China. Secure payments, trade assurance, and verified quality checks ensure your business runs smoothly.</p>
+                <button class="btn-primary">Explore Marketplace</button>
+            </div>
+            <div class="feature-img">
+                <img src="https://via.placeholder.com/600x400/E8F5E9/004D40?text=B2B+Marketplace+UI" alt="Marketplace Dashboard">
+            </div>
         </div>
-        <div class="feature-img">
-            <img src="https://via.placeholder.com/600x400/E8F5E9/004D40?text=B2B+Marketplace+UI" alt="Marketplace Dashboard">
-        </div>
-    </div>
 
-    <!-- Content Block 2: Freight Solutions -->
-    <div class="feature-content" id="freight">
-        <div class="feature-text">
-            <h2>Seamless Logistics & Shipping.</h2>
-            <p>Compare rates from top carriers for air, ocean, and land freight. Track your shipments in real-time from the warehouse in Shenzhen to your doorstep in Mumbai.</p>
-            <button class="btn-primary">Get Shipping Quotes</button>
+        <!-- Content Block 2: Freight Solutions -->
+        <div class="feature-content" id="freight">
+            <div class="feature-text">
+                <h2>Seamless Logistics & Shipping.</h2>
+                <p>Compare rates from top carriers for air, ocean, and land freight. Track your shipments in real-time from the warehouse in Shenzhen to your doorstep in Mumbai.</p>
+                <button class="btn-primary">Get Shipping Quotes</button>
+            </div>
+            <div class="feature-img">
+                <img src="https://via.placeholder.com/600x400/E3F2FD/0D47A1?text=Freight+Tracking+UI" alt="Freight Dashboard">
+            </div>
         </div>
-        <div class="feature-img">
-            <img src="https://via.placeholder.com/600x400/E3F2FD/0D47A1?text=Freight+Tracking+UI" alt="Freight Dashboard">
-        </div>
-    </div>
 
-    <!-- Content Block 3: Customs Clearance -->
-    <div class="feature-content" id="customs">
-        <div class="feature-text">
-            <h2>Hassle-free Documentation.</h2>
-            <p>Navigate complex import/export regulations effortlessly. Our AI-driven system assists with HS Codes, duty calculation, and filing necessary paperwork for Indian and Chinese customs.</p>
-            <button class="btn-primary">Check Compliance</button>
+        <!-- Content Block 3: Customs Clearance -->
+        <div class="feature-content" id="customs">
+            <div class="feature-text">
+                <h2>Hassle-free Documentation.</h2>
+                <p>Navigate complex import/export regulations effortlessly. Our AI-driven system assists with HS Codes, duty calculation, and filing necessary paperwork for Indian and Chinese customs.</p>
+                <button class="btn-primary">Check Compliance</button>
+            </div>
+            <div class="feature-img">
+                <img src="https://via.placeholder.com/600x400/FFF3E0/E65100?text=Customs+Documents+UI" alt="Customs Dashboard">
+            </div>
         </div>
-        <div class="feature-img">
-            <img src="https://via.placeholder.com/600x400/FFF3E0/E65100?text=Customs+Documents+UI" alt="Customs Dashboard">
-        </div>
-    </div>
 
-    <!-- Content Block 4: Carbon Calc -->
-    <div class="feature-content" id="carbon">
-        <div class="feature-text">
-            <h2>Sustainable Trade Insights.</h2>
-            <p>Calculate the carbon footprint of your supply chain. Make eco-friendly shipping choices and generate sustainability reports to meet global environmental standards.</p>
-            <button class="btn-primary">Calculate Footprint</button>
+        <!-- Content Block 4: Carbon Calc -->
+        <div class="feature-content" id="carbon">
+            <div class="feature-text">
+                <h2>Sustainable Trade Insights.</h2>
+                <p>Calculate the carbon footprint of your supply chain. Make eco-friendly shipping choices and generate sustainability reports to meet global environmental standards.</p>
+                <button class="btn-primary">Calculate Footprint</button>
+            </div>
+            <div class="feature-img">
+                <img src="https://via.placeholder.com/600x400/F1F8E9/33691E?text=Carbon+Calculator+UI" alt="Carbon Calculator">
+            </div>
         </div>
-        <div class="feature-img">
-            <img src="https://via.placeholder.com/600x400/F1F8E9/33691E?text=Carbon+Calculator+UI" alt="Carbon Calculator">
-        </div>
-    </div>
 
-</section>
+    </section>
 
-    <!-- 6. FREIGHT QUOTES (Existing) -->
+    <!-- 6. FREIGHT QUOTES -->
     <section class="section">
         <h2 class="section-title">Instant Freight Quotes</h2>
         <div class="freight-container">
@@ -964,7 +1004,7 @@
         </div>
     </section>
 
-    <!-- 7. TRENDING ITEMS (Existing) -->
+    <!-- 7. TRENDING ITEMS -->
     <section class="section">
         <h2 class="section-title">Latest trending items</h2>
         <div class="scroll-container">
@@ -1021,7 +1061,7 @@
         </div>
     </section>
 
-    <!-- 8. SOURCING STEPS (Existing) -->
+    <!-- 8. SOURCING STEPS -->
     <section class="section">
         <h2 class="section-title">Efficient product sourcing</h2>
         <div class="sourcing-steps">
@@ -1055,7 +1095,7 @@
         </div>
     </section>
 
-    <!-- 9. CALENDAR (Existing) -->
+    <!-- 9. CALENDAR -->
     <section class="section">
         <h2 class="section-title">Trade show calendar</h2>
         <div class="split-section">
@@ -1085,10 +1125,10 @@
         </div>
     </section>
 
-    <!-- 10. INSIGHTS (Existing) -->
+    <!-- 10. INSIGHTS -->
     <section class="section">
         <h2 class="section-title">The latest from Insights</h2>
-        <div class="sectors-grid" style="grid-template-columns: 1fr 2fr 1fr;">
+        <div class="sectors-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
             <div class="sector-card" style="display:flex; flex-direction:column; justify-content:center;">
                 <h1 style="font-size:3rem; color:var(--primary-green);">128+</h1>
                 <p>Countries supported by our logistics network.</p>
@@ -1105,7 +1145,7 @@
         </div>
     </section>
 
-    <!-- 11. BOTTOM CTA (Existing) -->
+    <!-- 11. BOTTOM CTA -->
     <div class="cta-section">
         <h2>Join NamsteChina to grow your business today!</h2>
         <div class="cta-buttons">
@@ -1114,7 +1154,7 @@
         </div>
     </div>
 
-    <!-- 12. FOOTER (Existing) -->
+    <!-- 12. FOOTER -->
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
@@ -1170,10 +1210,10 @@
                 // 2. Add 'active' class to clicked tab
                 tab.classList.add('active');
 
-                // 3. Hide all content blocks
+                // 3. Remove 'active' from all contents (this hides them via CSS)
                 contents.forEach(content => content.classList.remove('active'));
 
-                // 4. Show the content that matches the data-tab attribute
+                // 4. Add 'active' to the target content (this shows it via CSS)
                 const targetId = tab.getAttribute('data-tab');
                 const targetContent = document.getElementById(targetId);
                 targetContent.classList.add('active');
