@@ -10,6 +10,10 @@ def about():
     return render_template("aboutus.html")
 
 
+@app.route("/membership")
+def membership():
+    return render_template("membership.html")
+
 @app.route("/canton-fair")
 def canton_fair():
     return render_template("cantonfair.html")
@@ -22,3 +26,4 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
