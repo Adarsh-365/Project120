@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>China Membership - NamsteChina</title>
-    <!-- Font Awesome for Icons -->
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -26,7 +28,7 @@
         body { font-family: 'Inter', sans-serif; color: var(--text-dark); background-color: #f9f9f9; line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
 
-        /* --- 2. NAVBAR --- */
+        /* --- 2. NAVBAR (UI FIX ONLY) --- */
         .navbar {
             background: var(--white);
             padding: 15px 5%;
@@ -38,7 +40,47 @@
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-        .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary-green); display: flex; align-items: center; gap: 10px; }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links li a {
+            font-weight: 500;
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+
+        .nav-links li a:hover {
+            color: var(--primary-green);
+        }
+
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-text {
+            background: none;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--primary-green);
+        }
+
         .btn-primary { 
             background-color: var(--primary-green); 
             color: white; 
@@ -48,20 +90,50 @@
             border: none; 
             cursor: pointer; 
             transition: var(--transition);
-            display: inline-block;
-            text-align: center;
         }
-        .btn-primary:hover { background-color: #00352c; transform: translateY(-2px); color: white; }
+
+        .btn-primary:hover {
+            background-color: #00352c;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--primary-green);
+        }
+
+        @media (max-width: 900px) {
+            .menu-toggle { display: block; }
+
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                gap: 20px;
+                padding: 25px 0;
+                display: none;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            }
+
+            .nav-links.active { display: flex; }
+            .auth-buttons { display: none; }
+        }
 
         /* --- 3. HERO SECTION --- */
         .page-header {
-            background: linear-gradient(rgba(0, 77, 64, 0.9), rgba(0, 77, 64, 0.9)), url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1600&q=80');
+            background: linear-gradient(rgba(0, 77, 64, 0.9), rgba(0, 77, 64, 0.9)),
+            url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
             color: white;
             text-align: center;
             padding: 100px 20px;
         }
+
         .page-header h1 { font-size: 3rem; margin-bottom: 15px; }
         .page-header p { font-size: 1.2rem; opacity: 0.9; max-width: 800px; margin: 0 auto; }
 
@@ -77,6 +149,7 @@
             gap: 30px;
             margin-bottom: 50px;
         }
+
         .price-card {
             background: white;
             border-radius: 15px;
@@ -86,14 +159,34 @@
             border: 1px solid #eee;
             transition: var(--transition);
         }
-        .price-card.featured { border: 2px solid var(--accent-green); position: relative; }
-        .price-card h3 { font-size: 2rem; color: var(--primary-green); margin-bottom: 25px; }
-        .plan-box { background: var(--light-mint); padding: 20px; border-radius: 12px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+
+        .price-card.featured {
+            border: 2px solid var(--accent-green);
+            position: relative;
+        }
+
+        .price-card h3 {
+            font-size: 2rem;
+            color: var(--primary-green);
+            margin-bottom: 25px;
+        }
+
+        .plan-box {
+            background: var(--light-mint);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .plan-box span { font-weight: 700; font-size: 1.1rem; }
         .plan-price { font-size: 1.8rem; font-weight: 800; color: var(--primary-green); }
 
         /* --- 5. FACTORY VISIT ALLOWANCE --- */
         .table-wrapper { overflow-x: auto; margin-top: 20px; }
+
         .factory-schedule {
             width: 100%;
             background: white;
@@ -102,315 +195,375 @@
             overflow: hidden;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
-        .factory-schedule th { background: var(--primary-green); color: white; padding: 20px; text-align: left; }
-        .factory-schedule td { padding: 20px; border-bottom: 1px solid #eee; }
-        .visit-badge { background: var(--accent-green); color: var(--primary-green); padding: 5px 12px; border-radius: 20px; font-weight: 700; }
 
-        /* --- 6. SERVICE COMPARISON TABLE --- */
-        .comp-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; }
-        .comp-table th { background: var(--primary-green); color: white; padding: 15px; text-align: left; }
-        .comp-table td { padding: 15px; border-bottom: 1px solid #eee; font-size: 0.95rem; }
-        .cat-header { background: #f0f4f3; font-weight: 700; color: var(--primary-green); }
-        .check { color: var(--accent-green); font-weight: bold; }
-        .cross { color: var(--danger); font-weight: bold; }
-
-        /* --- 7. HOW IT HELPS SECTION (ANIMATED) --- */
-        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
-        
-        .benefit-card { 
-            background: white; 
-            padding: 35px; 
-            border-radius: 15px; 
-            border-bottom: 5px solid transparent; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: var(--transition);
+        .factory-schedule th {
+            background: var(--primary-green);
+            color: white;
+            padding: 20px;
             text-align: left;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
         }
 
-        /* Hover Animation */
-        .benefit-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            border-bottom: 5px solid var(--accent-green);
-            background: #ffffff;
+        .factory-schedule td {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
         }
 
-        .benefit-card i { 
-            font-size: 2.5rem; 
-            color: var(--primary-green); 
-            margin-bottom: 20px; 
-            display: block;
-            transition: var(--transition);
-        }
-
-        /* Icon Animation on card hover */
-        .benefit-card:hover i {
-            transform: scale(1.15) rotate(5deg);
-            color: var(--accent-green);
-        }
-
-        .benefit-card h4 { 
-            margin-bottom: 12px; 
-            color: var(--primary-green); 
-            font-size: 1.25rem; 
+        .visit-badge {
+            background: var(--accent-green);
+            color: var(--primary-green);
+            padding: 5px 12px;
+            border-radius: 20px;
             font-weight: 700;
         }
 
-        .benefit-card p {
-            color: var(--text-grey);
-            font-size: 0.95rem;
-            line-height: 1.5;
+        /* --- 6. SERVICE COMPARISON TABLE --- */
+        .comp-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
         }
 
-        /* --- 8. CTA BANNER --- */
-        .cta-banner { background: var(--primary-green); color: white; text-align: center; padding: 60px 20px; border-radius: 15px; margin-top: 60px; }
-        .cta-banner h2 { font-size: 2.2rem; margin-bottom: 20px; }
-        .cta-banner p { opacity: 0.9; margin-bottom: 30px; }
+        .comp-table th {
+            background: var(--primary-green);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .comp-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+        }
+
+        .cat-header {
+            background: #f0f4f3;
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+
+        .check { color: var(--accent-green); font-weight: bold; }
+        .cross { color: var(--danger); font-weight: bold; }
+
+        /* --- 7. HOW IT HELPS --- */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* --- 8. CTA --- */
+        .cta-banner {
+            background: var(--primary-green);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            border-radius: 15px;
+            margin-top: 60px;
+        }
 
         /* --- 9. FOOTER --- */
-        footer { background: var(--primary-green); color: white; padding: 60px 10% 20px; margin-top: 80px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
-        .copyright { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 40px; font-size: 0.9rem; opacity: 0.6; }
+        footer {
+            background: var(--primary-green);
+            color: white;
+            padding: 60px 10% 20px;
+            margin-top: 80px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
 
         @media (max-width: 768px) {
             .pricing-grid { grid-template-columns: 1fr; }
             .page-header h1 { font-size: 2.2rem; }
-            .benefit-card:hover { transform: translateY(-5px); }
         }
     </style>
 </head>
+
 <body>
 
-    <!-- NAVBAR -->
-        <nav class="navbar">
-        <div class="logo">
-            <i class="fa-solid fa-earth-americas"></i> NamsteChina.org
-        </div>
-        <ul class="nav-links">
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('about') }}">About Us</a></li>
-            <li>Our Partners</li>
-            <li><a href="{{ url_for('canton_fair') }}">Canton Fair</a></li>
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">
+        <i class="fa-solid fa-earth-americas"></i> NamsteChina.org
+    </div>
 
-            <li><a href="{{ url_for('membership') }}">Membership Plan</a></li>
-            <li>Contact Us</li>
-        </ul>
-        <div class="auth-buttons">
-            <button class="btn-text">Log In</button>
-            <button class="btn-primary">Join Free</button>
-        </div>
-    </nav>
+    <i class="fa-solid fa-bars menu-toggle" onclick="toggleMenu()"></i>
 
-    <!-- HERO -->
-    <header class="page-header">
-        <h1>China Business Membership</h1>
-        <p>Choose Your Membership Duration & Structure to ensure trust, transparency, and long-term growth.</p>
-    </header>
+    <ul class="nav-links" id="navMenu">
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About Us</a></li>
+        <li>Our Partners</li>
+        <li><a href="{{ url_for('canton_fair') }}">Canton Fair</a></li>
+        <li><a href="{{ url_for('membership') }}">Membership Plan</a></li>
+        <li>Contact Us</li>
+    </ul>
 
-    <!-- 1. PRICING SECTION -->
-    <section class="content-section">
-        <div class="container">
-            <h2 class="section-title">Membership Structure & Benefits</h2>
-            <div class="pricing-grid">
-                <!-- MSME -->
-                <div class="price-card">
-                    <h3>MSME</h3>
-                    <div class="plan-box">
-                        <span>1 Year Plan</span>
-                        <span class="plan-price">₹15,000</span>
-                    </div>
-                    <div class="plan-box">
-                        <span>3 Year Plan</span>
-                        <span class="plan-price">₹60,000</span>
-                    </div>
-                    <a href="https://drive.google.com/file/d/14t3r1oSDbKU2kECaW-_CSVNBUhQmfRg3/view?usp=sharing" class="btn-primary" style="width:100%; margin-top:20px;">Get Started</a>
+    <div class="auth-buttons">
+        <button class="btn-text">Log In</button>
+        <button class="btn-primary">Join Free</button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="page-header">
+    <h1>China Business Membership</h1>
+    <p>Choose Your Membership Duration & Structure to ensure trust, transparency, and long-term growth.</p>
+</header>
+
+<!-- PRICING -->
+<section class="content-section">
+    <div class="container">
+        <h2 class="section-title">Membership Structure & Benefits</h2>
+        <div class="pricing-grid">
+
+            <div class="price-card">
+                <h3>MSME</h3>
+                <div class="plan-box">
+                    <span>1 Year Plan</span>
+                    <span class="plan-price">₹15,000</span>
+                </div>
+                <div class="plan-box">
+                    <span>3 Year Plan</span>
+                    <span class="plan-price">₹60,000</span>
+                </div>
+                <a href="https://drive.google.com/file/d/14t3r1oSDbKU2kECaW-_CSVNBUhQmfRg3/view?usp=sharing"
+                   class="btn-primary" style="width:100%; margin-top:20px;">Get Started</a>
+            </div>
+
+            <div class="price-card featured">
+                <div style="position:absolute; top:-15px; left:50%; transform:translateX(-50%);
+                    background:var(--accent-green); color:var(--primary-green);
+                    padding:5px 15px; border-radius:5px; font-weight:800; font-size:0.8rem;">
+                    RECOMMENDED
                 </div>
 
-                <!-- Industries -->
-                <div class="price-card featured">
-                    <div style="position:absolute; top:-15px; left:50%; transform:translateX(-50%); background:var(--accent-green); color:var(--primary-green); padding:5px 15px; border-radius:5px; font-weight:800; font-size:0.8rem;">RECOMMENDED</div>
-                    <h3>Industries</h3>
-                    <div class="plan-box">
-                        <span>1 Year Plan</span>
-                        <span class="plan-price">₹30,000</span>
-                    </div>
-                    <div class="plan-box">
-                        <span>3 Year Plan</span>
-                        <span class="plan-price">₹1,00,000</span>
-                    </div>
-                    <a href="https://drive.google.com/file/d/14t3r1oSDbKU2kECaW-_CSVNBUhQmfRg3/view?usp=sharing" class="btn-primary" style="width:100%; margin-top:20px; background:var(--accent-green); color:var(--primary-green);">Get Started</a>
+                <h3>Industries</h3>
+                <div class="plan-box">
+                    <span>1 Year Plan</span>
+                    <span class="plan-price">₹30,000</span>
                 </div>
+                <div class="plan-box">
+                    <span>3 Year Plan</span>
+                    <span class="plan-price">₹1,00,000</span>
+                </div>
+
+                <a href="https://drive.google.com/file/d/14t3r1oSDbKU2kECaW-_CSVNBUhQmfRg3/view?usp=sharing"
+                   class="btn-primary"
+                   style="width:100%; margin-top:20px; background:var(--accent-green); color:var(--primary-green);">
+                    Get Started
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FACTORY VISITS -->
+<section class="content-section alt-bg">
+    <div class="container">
+        <h2 class="section-title">🏭 Factory Visit Allowance Schedule</h2>
+
+        <div class="table-wrapper">
+            <table class="factory-schedule">
+                <thead>
+                <tr>
+                    <th>Membership Duration</th>
+                    <th>MSME Category</th>
+                    <th>General Industries</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><strong>1 Year</strong></td>
+                    <td><span class="visit-badge">3 Factory Visits</span></td>
+                    <td><span class="visit-badge">5 Factory Visits</span></td>
+                </tr>
+                <tr>
+                    <td><strong>3 Years</strong></td>
+                    <td><span class="visit-badge">12 Factory Visits</span></td>
+                    <td><span class="visit-badge">20 Factory Visits</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="content-section">
+    <div class="container">
+        <h2 class="section-title">What You Get With Membership</h2>
+
+        <div class="table-wrapper">
+            <table class="comp-table">
+                <thead>
+                <tr>
+                    <th>Support Area / Service Level</th>
+                    <th>MSME Plan</th>
+                    <th>Industries Plan</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr class="cat-header"><td colspan="3">🧠 Trade Advisory & Compliance Support</td></tr>
+                <tr><td>Monthly Trade Guidelines</td><td>Basic Advisory</td><td>Expert Advisory</td></tr>
+                <tr><td>Compliance & Risk Advisory</td><td>Basic</td><td>Expert</td></tr>
+                <tr><td>Supplier Verification & Credibility Check</td><td class="check">Included</td><td class="check">Included</td></tr>
+                <tr><td>Pre-Transaction Advisory</td><td class="check">Included</td><td class="check">Included</td></tr>
+
+                <tr class="cat-header"><td colspan="3">🏛️ Government & Trade Intelligence</td></tr>
+                <tr><td>Government Trade Support</td><td class="check">Included</td><td class="check">Included</td></tr>
+                <tr><td>Canton Fair Updates & Data Sharing</td><td class="check">Included</td><td class="check">Included</td></tr>
+                <tr><td>Buyer Verification</td><td class="check">Included</td><td class="check">Included</td></tr>
+                <tr><td>Business Matching</td><td>Basic Level</td><td>Standard Level</td></tr>
+
+                <tr class="cat-header"><td colspan="3">✈️ China Visa & Factory Visit Support</td></tr>
+                <tr><td>China Business Visa Assistance</td><td class="check">Included</td><td class="check">Included</td></tr>
+                <tr><td>Factory Visit Coordination</td><td class="check">Included</td><td class="check">Included</td></tr>
+                <tr><td>Local Transport (China)</td><td class="check">Included</td><td class="check">Included</td></tr>
+                <tr><td>Translator / Interpreter</td><td class="check">Included</td><td class="check">Included</td></tr>
+
+                <tr class="cat-header"><td colspan="3">🤝 Advanced Services (Business Facilitation)</td></tr>
+                <tr><td>Business Meeting Coordination</td><td class="check">Included</td><td class="check">Included</td></tr>
+                <tr><td>Airport Pick-up & Drop</td><td class="cross">Not Included</td><td class="check">Included</td></tr>
+                <tr><td>Sample Handling Support</td><td class="cross">Not Included</td><td class="check">Included</td></tr>
+                <tr><td>Warehouse Support</td><td class="cross">Not Included</td><td class="check">Included</td></tr>
+                <tr><td>Negotiation & Pricing Strategy</td><td class="cross">Not Included</td><td class="check">Included</td></tr>
+                <tr><td>China Market & Strategy Advisory</td><td class="cross">Not Included</td><td class="check">Included</td></tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="content-section alt-bg">
+    <div class="container">
+        <h2 class="section-title">How This Membership Helps You</h2>
+
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h4>Safe & Guided Entry</h4>
+                <p>Enter the China trade market with professional risk assessment and local guidance.</p>
+            </div>
+
+            <div class="benefit-card">
+                <i class="fa-solid fa-arrow-up-right-dots"></i>
+                <h4>Scalable Sourcing</h4>
+                <p>Access high-volume manufacturers and professional supply chain management.</p>
+            </div>
+
+            <div class="benefit-card">
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+                <h4>Cost-Effective Advisory</h4>
+                <p>Fixed membership cost provides high-level trade intelligence.</p>
+            </div>
+
+            <div class="benefit-card">
+                <i class="fa-solid fa-users-gear"></i>
+                <h4>End-to-End Support</h4>
+                <p>Support from visa processing to factory visits and translators.</p>
+            </div>
+
+            <div class="benefit-card">
+                <i class="fa-solid fa-user-check"></i>
+                <h4>Verified Network</h4>
+                <p>Direct connections to pre-vetted suppliers and buyers.</p>
+            </div>
+
+            <div class="benefit-card">
+                <i class="fa-solid fa-comments-dollar"></i>
+                <h4>Market Control</h4>
+                <p>Leverage local negotiation expertise for best pricing.</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- 2. FACTORY VISIT ALLOWANCE -->
-    <section class="content-section alt-bg">
-        <div class="container">
-            <h2 class="section-title">🏭 Factory Visit Allowance Schedule</h2>
-            <div class="table-wrapper">
-                <table class="factory-schedule">
-                    <thead>
-                        <tr>
-                            <th>Membership Duration</th>
-                            <th>MSME Category</th>
-                            <th>General Industries</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>1 Year</strong></td>
-                            <td><span class="visit-badge">3 Factory Visits</span></td>
-                            <td><span class="visit-badge">5 Factory Visits</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>3 Years</strong></td>
-                            <td><span class="visit-badge">12 Factory Visits</span></td>
-                            <td><span class="visit-badge">20 Factory Visits</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+<!-- CTA -->
+<section class="container">
+    <div class="cta-banner">
+        <i class="fa-solid fa-rocket" style="font-size:3rem;color:var(--accent-green);margin-bottom:20px;"></i>
+        <h2>🚀 Start Your China Business With Confidence</h2>
+        <p>Ensure trust, transparency, and long-term growth.</p>
+
+        <a href="https://drive.google.com/file/d/14t3r1oSDbKU2kECaW-_CSVNBUhQmfRg3/view?usp=sharing"
+           class="btn-primary"
+           style="background:var(--accent-green); color:var(--primary-green); font-size:1.2rem; padding:15px 40px;">
+            Join Membership Now
+        </a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-grid">
+        <div>
+            <div class="logo" style="color:white;">
+                <i class="fa-solid fa-earth-americas"></i> NamsteChina.org
             </div>
+            <p style="opacity:0.7;">Connecting global trade through technology and trust.</p>
         </div>
-    </section>
 
-    <!-- 3. DETAILED COMPARISON -->
-    <section class="content-section">
-        <div class="container">
-            <h2 class="section-title">What You Get With Membership</h2>
-            <div class="table-wrapper">
-                <table class="comp-table">
-                    <thead>
-                        <tr>
-                            <th>Support Area / Service Level</th>
-                            <th>MSME Plan</th>
-                            <th>Industries Plan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Advisory -->
-                        <tr class="cat-header"><td colspan="3">🧠 Trade Advisory & Compliance Support</td></tr>
-                        <tr><td>Monthly Trade Guidelines</td><td>Basic Advisory</td><td>Expert Advisory</td></tr>
-                        <tr><td>Compliance & Risk Advisory</td><td>Basic</td><td>Expert</td></tr>
-                        <tr><td>Supplier Verification & Credibility Check</td><td class="check">Included</td><td class="check">Included</td></tr>
-                        <tr><td>Pre-Transaction Advisory</td><td class="check">Included</td><td class="check">Included</td></tr>
-                        
-                        <!-- Govt Support -->
-                        <tr class="cat-header"><td colspan="3">🏛️ Government & Trade Intelligence</td></tr>
-                        <tr><td>Government Trade Support</td><td class="check">Included</td><td class="check">Included</td></tr>
-                        <tr><td>Canton Fair Updates & Data Sharing</td><td class="check">Included</td><td class="check">Included</td></tr>
-                        <tr><td>Buyer Verification</td><td class="check">Included</td><td class="check">Included</td></tr>
-                        <tr><td>Business Matching</td><td>Basic Level</td><td>Standard Level</td></tr>
-
-                        <!-- On-Ground -->
-                        <tr class="cat-header"><td colspan="3">✈️ China Visa & Factory Visit Support</td></tr>
-                        <tr><td>China Business Visa Assistance</td><td class="check">Included</td><td class="check">Included</td></tr>
-                        <tr><td>Factory Visit Coordination</td><td class="check">Included</td><td class="check">Included</td></tr>
-                        <tr><td>Local Transport (China)</td><td class="check">Included</td><td class="check">Included</td></tr>
-                        <tr><td>Translator / Interpreter</td><td class="check">Included</td><td class="check">Included</td></tr>
-
-                        <!-- Advanced Services -->
-                        <tr class="cat-header"><td colspan="3">🤝 Advanced Services (Business Facilitation)</td></tr>
-                        <tr><td>Business Meeting Coordination</td><td class="check">Included</td><td class="check">Included</td></tr>
-                        <tr><td>Airport Pick-up & Drop</td><td class="cross">Not Included</td><td class="check">Included</td></tr>
-                        <tr><td>Sample Handling Support</td><td class="cross">Not Included</td><td class="check">Included</td></tr>
-                        <tr><td>Warehouse Support</td><td class="cross">Not Included</td><td class="check">Included</td></tr>
-                        <tr><td>Negotiation & Pricing Strategy</td><td class="cross">Not Included</td><td class="check">Included</td></tr>
-                        <tr><td>China Market & Strategy Advisory</td><td class="cross">Not Included</td><td class="check">Included</td></tr>
-                    </tbody>
-                </table>
-            </div>
+        <div>
+            <h4>Categories</h4>
+            <ul style="list-style:none;opacity:0.8;font-size:0.9rem;">
+                <li>MSME Support</li>
+                <li>Industrial Support</li>
+                <li>Sourcing Strategy</li>
+            </ul>
         </div>
-    </section>
 
-    <!-- 4. HOW IT HELPS (ANIMATED & UPDATED ICONS) -->
-    <section class="content-section alt-bg">
-        <div class="container">
-            <h2 class="section-title">How This Membership Helps You</h2>
-            <div class="benefits-grid">
-                <!-- Safe & Guided Entry -->
-                <div class="benefit-card">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <h4>Safe & Guided Entry</h4>
-                    <p>Enter the China trade market with professional risk assessment and local guidance to ensure transaction safety.</p>
-                </div>
-
-                <!-- Scalable Sourcing -->
-                <div class="benefit-card">
-                    <i class="fa-solid fa-arrow-up-right-dots"></i>
-                    <h4>Scalable Sourcing</h4>
-                    <p>Unlock access to high-volume manufacturers and professional supply chain management for massive business growth.</p>
-                </div>
-
-                <div class="benefit-card">
-                    <i class="fa-solid fa-hand-holding-dollar"></i>
-                    <h4>Cost-Effective Advisory</h4>
-                    <p>Fixed membership cost provides you with high-level trade intelligence usually reserved for corporate giants.</p>
-                </div>
-
-                <div class="benefit-card">
-                    <i class="fa-solid fa-users-gear"></i>
-                    <h4>End-to-End Support</h4>
-                    <p>Full operational support from visa processing to factory visits and professional translator services.</p>
-                </div>
-
-                <div class="benefit-card">
-                    <i class="fa-solid fa-user-check"></i>
-                    <h4>Verified Network</h4>
-                    <p>Direct connections to pre-vetted, reliable suppliers and buyers, saving you months of background research.</p>
-                </div>
-
-                <div class="benefit-card">
-                    <i class="fa-solid fa-comments-dollar"></i>
-                    <h4>Market Control</h4>
-                    <p>Leverage local negotiation expertise to secure the best pricing and terms from Chinese manufacturers.</p>
-                </div>
-            </div>
+        <div>
+            <h4>Contact</h4>
+            <ul style="list-style:none;opacity:0.8;font-size:0.9rem;">
+                <li>support@namastechina.org</li>
+                <li>Mumbai | Guangzhou</li>
+            </ul>
         </div>
-    </section>
+    </div>
 
-    <!-- 5. FINAL CTA -->
-    <section class="container">
-        <div class="cta-banner">
-            <i class="fa-solid fa-rocket" style="font-size: 3rem; color: var(--accent-green); margin-bottom: 20px;"></i>
-            <h2>🚀 Start Your China Business With Confidence</h2>
-            <p>Whether you are entering China trade or expanding large-scale sourcing, this membership ensures trust, transparency, and long-term growth.</p>
-            <a href="https://drive.google.com/file/d/14t3r1oSDbKU2kECaW-_CSVNBUhQmfRg3/view?usp=sharing" class="btn-primary" style="background: var(--accent-green); color: var(--primary-green); font-size: 1.2rem; padding: 15px 40px;">Join Membership Now</a>
-        </div>
-    </section>
+    <div class="copyright">
+        © 2026 NamsteChina. All rights reserved. #KeepMovingKeepTravell
+    </div>
+</footer>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <div class="logo" style="color:white; margin-bottom:20px;">
-                    <i class="fa-solid fa-earth-americas"></i> NamsteChina.org
-                </div>
-                <p style="opacity:0.7;">Connecting global trade through technology and trust.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Categories</h4>
-                <ul style="list-style:none; opacity:0.8; font-size:0.9rem;">
-                    <li>MSME Support</li>
-                    <li>Industrial Support</li>
-                    <li>Sourcing Strategy</li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Contact</h4>
-                <ul style="list-style:none; opacity:0.8; font-size:0.9rem;">
-                    <li>support@namastechina.org</li>
-                    <li>Mumbai | Guangzhou</li>
-                </ul>
-            </div>
-        </div>
-        <div class="copyright">
-            &copy; 2026 NamsteChina. All rights reserved. #KeepMovingKeepTravell
-        </div>
-    </footer>
+<script>
+function toggleMenu() {
+    document.getElementById("navMenu").classList.toggle("active");
+}
+</script>
 
 </body>
 </html>
